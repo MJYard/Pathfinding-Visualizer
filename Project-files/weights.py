@@ -14,7 +14,6 @@ def random_weights(main_grid):
 	for row in main_grid:
 		for node in row:
 			node.set_weight(random.uniform(1,10))
-		
 			grid.grid_update(node)
 
 def wave_noise(main_grid):
