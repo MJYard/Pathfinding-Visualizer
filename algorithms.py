@@ -6,36 +6,26 @@ import pygame
 import time
 import buttons
 
-
-
 def reconstruct_path(previous_node, node_path, end, g_score, start_var='Start'):
         path_list=[]
         path_length = g_score[end]
-        path_length_text =f'Path Length: {round(path_length,1)}'
-        
-        
+        path_length_text =f'Path Length: {round(path_length,1)}'     
         while True:
             if previous_node.check(start_var):
                 break
-
             path_list.append(previous_node)
             previous_node.make_type('Route')
             grid.grid_update(previous_node)
-            time.sleep(0.01)
-            
-        
+            time.sleep(0.01)        
             previous_node=node_path[previous_node]
-
             #time.sleep(1)
             pygame.event.pump()
-        
         return path_length_text
 
 def Heuristic1(node,End,D=1):
     
     dx=abs(End.row-node.row)
     dy=abs(End.column-node.column)
-
     return D * (dx**2+dy**2)**0.5
 
 def Heuristic2(node,End,D=10):
@@ -47,7 +37,6 @@ def Heuristic3(node,End,D=1):
     
     dx=abs(End.row-node.row)
     dy=abs(End.column-node.column)
-
     return dx+dy
 
 
