@@ -156,13 +156,7 @@ def main():
             #elif weight2_button.is_clicked():
                 
                 #weight2_button.unclick_button()
-
-
-
             
-
-            
-
             elif key_pressed and event.key == pygame.K_c or clear_button.is_clicked():
                 clear_button.is_clicked()
                 start,end = grid.grid_clear(main_grid)
@@ -189,11 +183,6 @@ def main():
                 end = None
                 grid_size_button.change_name(f'Grid size: {pr.rows}*{pr.columns} (G)')
                 grid_size_button.unclick_button()
-
-
-
-                    
-
 
             elif clicked_in_grid:
 
@@ -225,9 +214,6 @@ def main():
                 if button.rectangle.collidepoint(x,y):
                     if pygame.mouse.get_pressed()[0]:
                         button.toggle_state()
-
-
-            
 
 if __name__ == '__main__':
     main()
