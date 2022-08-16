@@ -1,7 +1,7 @@
 import colours
 import node
 import mazes
-import algorithms3
+import algorithms
 import grid
 import saving
 import parameters as pr
@@ -12,6 +12,7 @@ import pygame
 import itertools
 
 def main():
+
     pygame.init()
 
     pr.window.fill(colours.Colours.white)
@@ -23,7 +24,6 @@ def main():
     running = True
     path_length = f'N/A'
 
-   
 
     #Pathfinding
     pathfinding_title = buttons.Title('Pathfinding Algorithms', 'Titles', 1150, 20, 200, 30)
@@ -33,9 +33,9 @@ def main():
     dijkstra_button = buttons.Toggle('Dijkstra', 'Pathfinding',
         *buttons.button_group_placement(2,  pathfinding_title))
     #bi_astar_button = buttons.Toggle('Bidirectional Astar', 'Pathfinding',
-        #*buttons.button_group_placement(3,  pathfinding_title))
+        #*buttons.button_group_placement(4,  pathfinding_title))
     greedy_button = buttons.Toggle('Greedy BFS', 'Pathfinding',
-     *buttons.button_group_placement(4,  pathfinding_title))
+     *buttons.button_group_placement(3,  pathfinding_title))
 
     #Mazes
     maze_title = buttons.Title('Mazes', 'Titles', 1150, 200, 200, 30)
@@ -46,16 +46,16 @@ def main():
         *buttons.button_group_placement(2, maze_title))
     maze3_button = buttons.Toggle('Breadth First Search (M)', 'Maze',
         *buttons.button_group_placement(3, maze_title))
-    maze4_button = buttons.Toggle('maze4', 'Maze',
-        *buttons.button_group_placement(4, maze_title))
+    #maze4_button = buttons.Toggle('maze4', 'Maze',
+        #*buttons.button_group_placement(4, maze_title))
 
     #Weights
     weight_title = buttons.Title('Node weights', 'Titles', 1150, 380, 200, 30)
 
     random_weight_button = buttons.Toggle('Random Weights', 'Weights',
         *buttons.button_group_placement(1,  weight_title))
-    weight2_button = buttons.Toggle('weight2', 'Weights',
-        *buttons.button_group_placement(2,  weight_title))
+    #weight2_button = buttons.Toggle('weight2', 'Weights',
+        #*buttons.button_group_placement(2,  weight_title))
     #weight3_button = buttons.Toggle('weight3', 'Weights',
         #*buttons.button_group_placement(3,  weight_title))
     #weight4_button = buttons.Toggle('weight4', 'Weights',
@@ -74,7 +74,7 @@ def main():
         *buttons.button_group_placement(4, menu_title))
     reset_weights_button = buttons.Switch('Reset Weights (W)', 'Menu',
         *buttons.button_group_placement(5, menu_title))
-    turn_weighting_button = buttons.Switch('Turn weighting (T)', 'Menu',
+    grid_size_button = buttons.Switch(f'Grid size: {pr.rows}*{pr.columns} (G)', 'Menu',
         *buttons.button_group_placement(6, menu_title))
     
     #Results
@@ -82,7 +82,7 @@ def main():
 
     path_length_button = buttons.Label(f'Path Length: {path_length}', 'Results',
         *buttons.button_group_placement(1, result_title))
-    nodes_checked_button = buttons.Switch('result2', 'Nodes Checked: ',
+    nodes_checked_button = buttons.Switch('Nodes Checked: ', 'Results',
         *buttons.button_group_placement(2, result_title))
   
     pygame.display.flip()
@@ -106,20 +106,20 @@ def main():
                 
                 start_button.clicked_button()
                 if astar_button.is_clicked():
-                    results = algorithms3.AStar_alg(start, end, main_grid, alg_type='Astar')
+                    results = algorithms.AStar_alg(start, end, main_grid, alg_type='Astar')
 
                 elif dijkstra_button.is_clicked():
-                    results = algorithms3.AStar_alg(start, end, main_grid, alg_type='dijkstra')
+                    results = algorithms.AStar_alg(start, end, main_grid, alg_type='dijkstra')
 
                 elif greedy_button.is_clicked():
-                    results = algorithms3.AStar_alg(start, end, main_grid, alg_type='greedy bfs')
+                    results = algorithms.AStar_alg(start, end, main_grid, alg_type='greedy bfs')
 
                 #elif bi_astar_button.is_clicked():
-                    #results = algorithms3.bi_Astar(start, end, main_grid)
+                    #results = algorithms.bi_Astar(start, end, main_grid)
                     
                 else:
                     dijkstra_button.toggle_state()
-                    results = algorithms3.AStar_alg(start, end, main_grid, alg_type='dijkstra')
+                    results = algorithms.AStar_alg(start, end, main_grid, alg_type='dijkstra')
 
 
                 nodes_checked_button.change_name(f'Nodes Checked: {results[1]}')
@@ -153,17 +153,9 @@ def main():
                 weights.random_weights(main_grid)
                 random_weight_button.unclick_button()
 
-            elif weight2_button.is_clicked():
+            #elif weight2_button.is_clicked():
                 
-                pr.rows = pr.rows_dict[pr.rows]
-                pr.columns = pr.rows
-                pr.hor_gap = pr.width//pr.rows
-                pr.ver_gap = pr.height//pr.rows
-                main_grid = grid.Grid()
-                grid.Draw(main_grid)
-                start = None
-                end = None
-                weight2_button.unclick_button()
+                #weight2_button.unclick_button()
 
 
 
@@ -185,6 +177,18 @@ def main():
                 reset_weights_button.is_clicked()
                 weights.reset_weights(main_grid)
                 reset_weights_button.unclick_button()
+
+            elif key_pressed and event.key == pygame.K_g or grid_size_button.is_clicked():
+                pr.rows = pr.rows_dict[pr.rows]
+                pr.columns = pr.rows
+                pr.hor_gap = pr.width//pr.rows
+                pr.ver_gap = pr.height//pr.rows
+                main_grid = grid.Grid()
+                grid.Draw(main_grid)
+                start = None
+                end = None
+                grid_size_button.change_name(f'Grid size: {pr.rows}*{pr.columns} (G)')
+                grid_size_button.unclick_button()
 
 
 

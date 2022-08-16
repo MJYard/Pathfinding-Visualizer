@@ -14,7 +14,10 @@ class Label:
 		self.colour =  (220,220,220)
 		self.rectangle = pygame.Rect(self.x_pos, self.y_pos,  self.width, self.height)
 		self.draw_button()
+
 		
+
+
 	def __str__(self):
 		return self.button_text
 
@@ -104,11 +107,13 @@ class Title:
 		pygame.display.update((self.x_pos-2, self.y_pos-2,  self.width+4,self.height+4)) # Updates the screen for the button
 
 def button_group_placement(button_number, title_button):
+
 	# button number placement
 	# 1    2
 	# 3    4 etc
-	
+
 	title_location = list(title_button.get_position())
+
 	if not button_number % 2:
 		left = 1270
 		top = int(title_location[1] + 60 * button_number/2)
@@ -118,6 +123,7 @@ def button_group_placement(button_number, title_button):
 		top = int(title_location[1] + 60 * ((button_number-1)/2 + 1))
 
 	width, height = 200, 30
+
 	return left, top, width, height
 	
 	
