@@ -140,23 +140,4 @@ def AStar_alg(start, end, main_grid ,alg_type='Astar'):
 
     return path_length_text, node_checked_count
 
-
-
-
-       
-       
-        
-
-
-    #     new_var = node_path_2[final_node_1[0]][0]
-    # new_var.make_type('Route')
-    # grid.grid_update(new_var)
-    
-    # for i in range(100):
-    #     if new_var.check('End'):
-    #         break
-    #     time.sleep(2)
-    #     new_var = node_path_2[new_var][0]
-    #     new_var.make_type('Route')
-    #     grid.grid_update(new_var)
         
