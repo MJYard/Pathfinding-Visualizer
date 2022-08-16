@@ -96,7 +96,8 @@ def AStar_alg(start, end, main_grid ,alg_type='Astar'):
 
         for neighbour_tuple in current.check_neighbours(main_grid):
             pygame.event.pump()
-            #time.sleep(0.001)
+            time.sleep(0.00001)
+            
             neighbour = neighbour_tuple[0]
             
 
